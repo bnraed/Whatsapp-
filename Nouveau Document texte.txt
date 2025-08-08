@@ -1,0 +1,102 @@
+Parfait ! C’est un projet très complet qui touche au SaaS, multi‑tenant, API WhatsApp Cloud, gestion de campagnes, analyse, et sécurité. On va le découper en étapes claires, et à chaque étape, on fera les commandes, la structure des dossiers et le code nécessaire.
+
+Voici le plan d’action (que l’on va suivre pas à pas) :
+
+Phase 1 – Préparation & Setup du projet
+Créer le repo GitHub (backend + frontend, deux dossiers distincts).
+
+Initialiser le frontend
+
+Next.js 14 + TypeScript
+
+TailwindCSS (design rapide)
+
+UI de base : login, dashboard (vide).
+
+Initialiser le backend
+
+Fastify + TypeScript.
+
+Configurer l’architecture (routes, services, middlewares).
+
+Mise en place de Mongoose (MongoDB).
+
+Installer les outils de sécurité : helmet, rate‑limit, cors.
+
+Phase 2 – Authentification & Multi‑tenant
+Création du modèle Company (tenant) et User (admin, manager, opérateur).
+
+JWT Auth multi‑tenant (chaque user est lié à une entreprise).
+
+Middleware d’isolation (chaque requête accède uniquement à ses propres données).
+
+Inscription d’une entreprise + gestion des rôles.
+
+Phase 3 – Intégration WhatsApp Cloud
+Créer une app Meta Developer (on fera pas à pas ensemble).
+
+Configurer les credentials (APP_ID, APP_SECRET, access tokens).
+
+Mettre en place les webhooks (Fastify route pour recevoir les events).
+
+Gestion multi‑compte WABA : chaque entreprise connecte son propre compte WhatsApp.
+
+Phase 4 – Gestion des contacts
+Modèle Contact : nom, numéro, tags, historique messages.
+
+Importation CSV/Excel (via Multer + ExcelJS).
+
+Segmentation & tags.
+
+Validation + suppression des doublons.
+
+Phase 5 – Gestion des campagnes
+Modèle Campaign : nom, contenu, variables dynamiques.
+
+Rich message composer côté frontend (texte, emojis, variables {name}).
+
+Planification (date de début, récurrence).
+
+Test A/B (variantes).
+
+Phase 6 – Envoi de messages en masse
+Queue system (Redis + BullMQ ou RabbitMQ).
+
+Respect du rate‑limit par tenant.
+
+Retry intelligent pour les messages échoués.
+
+Tracking en temps réel (Socket.io).
+
+Phase 7 – Analyse et reporting
+Tracking des statuts (envoyé, livré, lu, échoué).
+
+Dashboard Next.js avec graphiques (Chart.js/Recharts).
+
+Export des rapports (PDF/Excel).
+
+Phase 8 – Sécurité & conformité
+Cryptage des données sensibles (ex: tokens).
+
+Journalisation (audit logs).
+
+Sauvegardes automatiques MongoDB.
+
+Conformité RGPD (opt‑in / opt‑out).
+
+Phase 9 – Déploiement
+Dockerisation (backend + frontend + Mongo + Redis).
+
+Configuration Nginx comme reverse proxy.
+
+Déploiement sur VPS (ex: DigitalOcean).
+
+Outils principaux
+Frontend : Next.js 14, TailwindCSS, TypeScript, Recharts.
+
+Backend : Fastify, TypeScript, Mongoose, BullMQ (queues), Socket.io.
+
+DB & Caching : MongoDB + Redis.
+
+Autres : ExcelJS (fichiers Excel), Multer (upload), JWT, Helmet, Rate-limit.
+

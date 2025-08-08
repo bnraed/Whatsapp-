@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "WhatsApp Platform",
+    "_postman_id": "12345678-aaaa-bbbb-cccc-1234567890ab",
+    "description": "Collection Postman pour tester l'API WhatsApp Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"companyName\": \"Ma Société\",\n    \"name\": \"Admin\",\n    \"email\": \"admin@mail.com\",\n    \"password\": \"123456\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/auth/register" }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"admin@mail.com\",\n    \"password\": \"123456\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/auth/login" }
+      }
+    },
+    {
+      "name": "WhatsApp Connect",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"appId\": \"TON_APP_ID\",\n    \"appSecret\": \"TON_APP_SECRET\",\n    \"accessToken\": \"TON_ACCESS_TOKEN\",\n    \"phoneNumberId\": \"TON_PHONE_NUMBER_ID\",\n    \"businessAccountId\": \"TON_BUSINESS_ACCOUNT_ID\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/whatsapp/connect" }
+      }
+    },
+    {
+      "name": "Send WhatsApp Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"to\": \"216XXXXXXXX\",\n    \"message\": \"Salut ! Ceci est un message envoyé via notre plateforme 🚀\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/messages/send" }
+      }
+    },
+    {
+      "name": "Webhook GET Verify",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/webhook?hub.mode=subscribe&hub.verify_token=monTokenWebhook&hub.challenge=12345"
+        }
+      }
+    },
+    {
+      "name": "Webhook POST Event",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"entry\": [\n        { \"id\": \"whatsapp_business_account\", \"changes\": [ { \"field\": \"messages\", \"value\": { \"messages\": [ { \"from\": \"216XXXXXXX\", \"text\": { \"body\": \"Hello\" } } ] } } ] }\n    ]\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/webhook" }
+      }
+    }
+  ]
+}
